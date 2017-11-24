@@ -105,15 +105,25 @@ namespace SevenSnakesSearch
                             sums[snake.Weight] = new List<Snake>();
                         }
 
+                        var maxOverlappedSize = 0;
                         foreach (var oldSnake in sums[snake.Weight])
                         {
-                            if (oldSnake.NotOverlappedWith(snake))
+                            var overlapped = oldSnake.OverlappedSize(snake);
+                            if (overlapped == 0)
                             {
                                 return new Tuple<Snake, Snake>(oldSnake, snake);
+                            } 
+                            if(overlapped > maxOverlappedSize)
+                            {
+                                maxOverlappedSize = overlapped;
                             }
+                                
                         }
-                        
-                        sums[snake.Weight].Add(snake);
+
+                        if (maxOverlappedSize < Snake.MAX_LENGTH)
+                        {
+                            sums[snake.Weight].Add(snake);
+                        }
                     }
                 }
             }
