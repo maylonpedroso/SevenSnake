@@ -16,15 +16,32 @@ namespace SevenSnakesSearch
         public Grid(StreamReader reader)
         {
             var index = 0;
-            while (!reader.EndOfStream)
+            string line;
+            while ((line = reader.ReadLine())!= null)
             {
-                var line = ParseLine(reader.ReadLine());
+                if (index > 0 && index == GetSize())
+                {
+                    throw new Exception("CSV file do not represents a square. More rows than columns.");
+                }
+                var cells = ParseLine(line);
+                for (var col = 0; col < cells.Length; col++)
+                {
+                    if (cells[col] > 256 || cells[col] < 0)
+                    {
+                        throw new Exception(string.Format("Invalid cell value in row {0} column {1}", index+1, col+1));
+                    }
+                }
                 
                 if (data == null)
                 {
-                    data =  new int[line.Length][];
+                    data =  new int[cells.Length][];
                 }
-                data[index] = line;
+
+                if (cells.Length != data.Length)
+                {
+                    throw new Exception(string.Format("Invalid csv line length: row {0}", index+1));
+                }
+                data[index] = cells;
                 
                 index++;
             }
@@ -77,7 +94,7 @@ namespace SevenSnakesSearch
         /// <returns>Tuple containing two similar snakes if found</returns>
         public Tuple<Snake, Snake> SearchSimilarPair()
         {
-            var sums = new List<Snake>[1792];
+            var sums = new List<Snake>[1793];
 
             for (var y = 0; y < data.Length; y++)
             {

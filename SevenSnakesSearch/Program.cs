@@ -21,9 +21,23 @@ namespace SevenSnakesSearch
                 Console.WriteLine("Can not find the specified file");
                 return;
             }
-            
-            var grid = new Grid(new StreamReader(filePath));
-            
+
+            Grid grid;
+            try
+            {
+                grid = new Grid(new StreamReader(filePath));
+            }
+            catch (FormatException e)
+            {
+                Console.WriteLine("Error parsing csv: Invalid cell value found, not a number");
+                return;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error parsing csv: {0}", e.Message);
+                return;
+            }
+
             var result = grid.SearchSimilarPair();
 
             if (result == null)
