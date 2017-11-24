@@ -1,5 +1,5 @@
-# SevenSnake
+# SevenSnake v0.1
 
-# Usage: SevenSnakesSearch.exe path/file.csv
+- Usage: SevenSnakesSearch.exe path/file.csv
 
 
