@@ -77,7 +77,7 @@ namespace SevenSnakesSearch
         /// <returns>Tuple containing two similar snakes if found</returns>
         public Tuple<Snake, Snake> SearchSimilarPair()
         {
-            var sums = new List<Snake>[1785];
+            var sums = new List<Snake>[1792];
 
             for (var y = 0; y < data.Length; y++)
             {
