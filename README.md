@@ -6,6 +6,6 @@ Generate all snakes starting in each cell and keep a record for every obtained s
 - Usage: SevenSnakesSearch.exe path/to/file.csv
 
 
-Random grig generator:
+Random grid generator:
 
 - Usage: GridGenerator.exe size path/to/file.csv 
