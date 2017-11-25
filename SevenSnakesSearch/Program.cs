@@ -23,22 +23,23 @@ namespace SevenSnakesSearch
             }
 
             Grid grid;
+            Tuple<Snake, Snake> result;
             try
             {
                 grid = new Grid(new StreamReader(filePath));
+                result = grid.SearchSimilarPair();
             }
             catch (FormatException e)
             {
-                Console.Error.WriteLine("Error parsing csv: Invalid cell value found, not a number");
+                Console.Error.WriteLine("Invalid cell value found, not a number");
                 return;
             }
             catch (Exception e)
             {
-                Console.Error.WriteLine("Error parsing csv: {0}", e.Message);
+                Console.Error.WriteLine(e.Message);
                 return;
             }
 
-            var result = grid.SearchSimilarPair();
 
             if (result == null)
             {
