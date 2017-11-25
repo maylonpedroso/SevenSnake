@@ -22,12 +22,10 @@ namespace SevenSnakesSearch
                 return;
             }
 
-            Grid grid;
             Tuple<Snake, Snake> result;
             try
             {
-                grid = new Grid(new StreamReader(filePath));
-                result = grid.SearchSimilarPair();
+                result = new Grid(new StreamReader(filePath)).SearchSimilarPair();
             }
             catch (FormatException e)
             {
