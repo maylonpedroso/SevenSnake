@@ -12,13 +12,13 @@ namespace SevenSnakesSearch
 
             if (args.Length != 1)
             {
-                Console.WriteLine(USAGE);
+                Console.Error.WriteLine(USAGE);
                 return;
             }
             
             var filePath = args[0];
             if(!File.Exists(filePath)) {
-                Console.WriteLine("Can not find the specified file");
+                Console.Error.WriteLine("Can not find the specified file");
                 return;
             }
 
@@ -29,12 +29,12 @@ namespace SevenSnakesSearch
             }
             catch (FormatException e)
             {
-                Console.WriteLine("Error parsing csv: Invalid cell value found, not a number");
+                Console.Error.WriteLine("Error parsing csv: Invalid cell value found, not a number");
                 return;
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error parsing csv: {0}", e.Message);
+                Console.Error.WriteLine("Error parsing csv: {0}", e.Message);
                 return;
             }
 

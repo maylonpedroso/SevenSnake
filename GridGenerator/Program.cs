@@ -15,14 +15,14 @@ namespace GridGenerator
         {
             if (args.Length != 1)
             {
-                Console.WriteLine(USAGE);
+                Console.Error.WriteLine(USAGE);
                 return;
             }
 
             int size;
             if (!int.TryParse(args[0], out size))
             {
-                Console.WriteLine("Invalid size number");
+                Console.Error.WriteLine("Invalid size number");
                 return;
             }
 
