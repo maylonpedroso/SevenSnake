@@ -7,53 +7,59 @@ namespace SevenSnakesSearch
 {
     public class Grid
     {
-        private int[][] data;
+        private List<int[]> data;
+        
+        private int offset;
+
+        private int? height;
+
+        private int? width;
+
+        private TextReader reader;
 
         /// <summary>
         /// Load a grid from file reader. 
         /// </summary>
         /// <param name="reader">must be a valid CSV file, and number of rows and columns must be the same.</param>
-        public Grid(StreamReader reader)
+        public Grid(TextReader reader)
         {
-            var index = 0;
+            this.reader = reader;
+            data = new List<int[]>();
+            ReadNextLine();
+        }
+
+
+        private bool ReadNextLine()
+        {
             string line;
-            while ((line = reader.ReadLine())!= null)
+            if ((line = reader.ReadLine()) != null)
             {
-                if (index > 0 && index == GetSize())
-                {
-                    throw new Exception("CSV file do not represents a square. More rows than columns.");
-                }
                 var cells = ParseLine(line);
+                if (width != null && cells.Length != width)
+                {
+                    throw new Exception(string.Format("Invalid csv line length: row {0}", offset + data.Count));
+                }
+
+                width = cells.Length;
+                
                 for (var col = 0; col < cells.Length; col++)
                 {
                     if (cells[col] > 256 || cells[col] < 0)
                     {
-                        throw new Exception(string.Format("Invalid cell value in row {0} column {1}", index+1, col+1));
+                        throw new Exception(string.Format("Invalid cell value in row {0} column {1}", offset + data.Count + 1, col + 1));
                     }
                 }
-                
-                if (data == null)
+                data.Add(cells);
+                if (data.Count > Snake.MAX_LENGTH * 2 - 1)
                 {
-                    data =  new int[cells.Length][];
+                    data.RemoveAt(0);
+                    offset++;
                 }
-
-                if (cells.Length != data.Length)
-                {
-                    throw new Exception(string.Format("Invalid csv line length: row {0}", index+1));
-                }
-                data[index] = cells;
-                
-                index++;
+                return true;
             }
-        }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        public int GetSize()
-        {
-            return data.Length;
+            height = offset + data.Count;
+            return false;
         }
 
         /// <summary>
@@ -64,7 +70,13 @@ namespace SevenSnakesSearch
         /// <returns>true if x and y are within the limits of the grid, false otherwise</returns>
         public bool isPointInside(int x, int y)
         {
-            return x >= 0 && y >= 0 && x < data.Length && y < data.Length;
+            if (x < 0 || y < 0 || x >= width)
+                return false;
+            while (y - offset >=  data.Count && ReadNextLine())
+            {
+            }
+
+            return y - offset < data.Count;
         }
 
         /// <summary>
@@ -85,7 +97,7 @@ namespace SevenSnakesSearch
         /// <returns>int value in position x,y of the grid</returns>
         public int GetCell(int x, int y)
         {
-            return data[y][x];
+            return data[y - offset][x];
         }
 
         /// <summary>
@@ -96,9 +108,10 @@ namespace SevenSnakesSearch
         {
             var sums = new List<Snake>[1793];
 
-            for (var y = 0; y < data.Length; y++)
+            var y = 0;
+            while (height == null || y < height)
             {
-                for (var x = 0; x < data.Length; x++)
+                for (var x = 0; x < width; x++)
                 {
                     var snakes = new List<Snake>
                     {
@@ -143,6 +156,7 @@ namespace SevenSnakesSearch
                         }
                     }
                 }
+                y++;
             }
 
             return null;

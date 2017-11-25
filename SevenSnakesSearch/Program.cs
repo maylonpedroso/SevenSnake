@@ -12,33 +12,32 @@ namespace SevenSnakesSearch
 
             if (args.Length != 1)
             {
-                Console.WriteLine(USAGE);
+                Console.Error.WriteLine(USAGE);
                 return;
             }
             
             var filePath = args[0];
             if(!File.Exists(filePath)) {
-                Console.WriteLine("Can not find the specified file");
+                Console.Error.WriteLine("Can not find the specified file");
                 return;
             }
 
-            Grid grid;
+            Tuple<Snake, Snake> result;
             try
             {
-                grid = new Grid(new StreamReader(filePath));
+                result = new Grid(new StreamReader(filePath)).SearchSimilarPair();
             }
             catch (FormatException e)
             {
-                Console.WriteLine("Error parsing csv: Invalid cell value found, not a number");
+                Console.Error.WriteLine("Invalid cell value found, not a number");
                 return;
             }
             catch (Exception e)
             {
-                Console.WriteLine("Error parsing csv: {0}", e.Message);
+                Console.Error.WriteLine(e.Message);
                 return;
             }
 
-            var result = grid.SearchSimilarPair();
 
             if (result == null)
             {
