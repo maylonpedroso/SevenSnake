@@ -39,6 +39,7 @@ namespace SevenSnakesSearch
                 var head = new Tuple<int, int>(Head.Item1 + MX[i], Head.Item2 + MY[i]);
                 if (grid.isPointInside(head.Item1, head.Item2)
                     && !Body.Contains(head) 
+                    && NotAdjacentToBody(head)
                     && MAX_LENGTH - Body.Count - 1 - (head.Item1 > pX ? 0:1) >= pY - head.Item2
                     )
                 {
@@ -46,6 +47,20 @@ namespace SevenSnakesSearch
                 }
             }
             return snakes;
+        }
+
+        private bool NotAdjacentToBody(Tuple<int, int> cell)
+        {
+            for (var i = 0; i < 4; i++)
+            {
+                var adjacent = new Tuple<int, int>(cell.Item1 + MX[i], cell.Item2 + MY[i]);
+                if (!adjacent.Equals(Head) && Body.Contains(adjacent))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
 
         /// <summary>
