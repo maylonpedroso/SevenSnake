@@ -2,6 +2,8 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SevenSnakesSearch", "SevenSnakesSearch\SevenSnakesSearch.csproj", "{178981D4-F2EE-4C8A-A3C8-0647CCF074F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GridGenerator", "GridGenerator\GridGenerator.csproj", "{88FCFAC4-5BC5-42B5-A497-72A6DF25F4AF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +14,9 @@ Global
 		{178981D4-F2EE-4C8A-A3C8-0647CCF074F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{178981D4-F2EE-4C8A-A3C8-0647CCF074F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{178981D4-F2EE-4C8A-A3C8-0647CCF074F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{88FCFAC4-5BC5-42B5-A497-72A6DF25F4AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{88FCFAC4-5BC5-42B5-A497-72A6DF25F4AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{88FCFAC4-5BC5-42B5-A497-72A6DF25F4AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{88FCFAC4-5BC5-42B5-A497-72A6DF25F4AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
