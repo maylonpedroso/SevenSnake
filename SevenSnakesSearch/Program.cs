@@ -27,7 +27,7 @@ namespace SevenSnakesSearch
             try
             {
                 var reader = new StreamReader(filePath);
-                result = new Search().findSimilarPair(new Grid(reader));
+                result = Search.FindSimilarPair(new Grid(reader));
                 reader.Close();
             }
             catch (FormatException e)

@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace SevenSnakesSearch
 {
-    public class Search
+    public static class Search
     {
         /// <summary>
         /// Search for the first pair of similar (same weight) snakes 
         /// </summary>
         /// <returns>Tuple containing two similar snakes if found</returns>
-        public Tuple<Snake, Snake> findSimilarPair(Grid grid)
+        public static Tuple<Snake, Snake> FindSimilarPair(Grid grid)
         {
             var sums = new List<Snake>[Grid.MAX_CELL_VALUE * Snake.MAX_LENGTH + 1];
 
