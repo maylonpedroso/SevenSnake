@@ -45,8 +45,8 @@ namespace SevenSnakesSearch
             }
             else
             {
-                Console.WriteLine("Snake 1: " + result.Item1.ToString());
-                Console.WriteLine("Snake 2: " + result.Item2.ToString());
+                Console.WriteLine($"Snake 1: {result.Item1}");
+                Console.WriteLine($"Snake 2: {result.Item2}");
             }
         }
     }
