@@ -5,14 +5,14 @@ namespace SevenSnakesSearch
 {
     internal class Program
     {
-        private const string USAGE = "Usage: SevenSnakesSearch.exe csv_path";
+        private const string Usage = "Usage: SevenSnakesSearch.exe csv_path";
         
         public static void Main(string[] args)
         {
 
             if (args.Length != 1)
             {
-                Console.Error.WriteLine(USAGE);
+                Console.Error.WriteLine(Usage);
                 return;
             }
             
@@ -25,7 +25,9 @@ namespace SevenSnakesSearch
             Tuple<Snake, Snake> result;
             try
             {
-                result = new Grid(new StreamReader(filePath)).SearchSimilarPair();
+                var reader = new StreamReader(filePath);
+                result = Search.FindSimilarPair(new Grid(reader));
+                reader.Close();
             }
             catch (FormatException e)
             {
@@ -45,8 +47,8 @@ namespace SevenSnakesSearch
             }
             else
             {
-                Console.WriteLine("Snake 1: " + result.Item1.ToString());
-                Console.WriteLine("Snake 2: " + result.Item2.ToString());
+                Console.WriteLine(result.Item1);
+                Console.WriteLine(result.Item2);
             }
         }
     }

@@ -6,7 +6,7 @@ namespace GridGenerator
 {
     internal class Program
     {
-        private const string USAGE = "GridGenerator.exe size path/to/file.csv";
+        private const string Usage = "GridGenerator.exe size path/to/file.csv";
 
         /// <summary>
         /// Generate a grid (comma-separated) with the specified size and random values 
@@ -16,7 +16,7 @@ namespace GridGenerator
         {
             if (args.Length != 2)
             {
-                Console.Error.WriteLine(USAGE);
+                Console.Error.WriteLine(Usage);
                 return;
             }
 
