@@ -100,13 +100,13 @@ namespace SevenSnakesSearch
         }
 
         /// <summary>
-        /// Count the number of cell shared by the snakes
+        /// Find if this snake shares any cell with the given snake
         /// </summary>
         /// <param name="snake"></param>
-        /// <returns>int number of shared cells</returns>
-        public int OverlappedSize(Snake snake)
+        /// <returns>true number if shared cells found, otherwise false</returns>
+        public bool IsOverlappedWith(Snake snake)
         {
-            return snake.Body.Count(cell => Body.Contains(cell));
+            return snake.Body.Any(cell => Body.Contains(cell));
         }
 
         /// <summary>
