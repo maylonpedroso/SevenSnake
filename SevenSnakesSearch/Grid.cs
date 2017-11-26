@@ -7,17 +7,17 @@ namespace SevenSnakesSearch
 {
     public class Grid
     {
-        private const int MAX_CELL_VALUE = 255;
+        public const int MAX_CELL_VALUE = 255;
         
         private List<int[]> data;
         
         private int offset;
 
-        private int? height;
-
-        private int? width;
-
         private readonly TextReader reader;
+
+        public int? Height { get; private set; }
+
+        public int? Width { get; private set; }
 
         /// <summary>
         /// Load a grid from file reader. 
@@ -41,12 +41,12 @@ namespace SevenSnakesSearch
             if ((line = reader.ReadLine()) != null)
             {
                 var cells = ParseLine(line);
-                if (width != null && cells.Length != width)
+                if (Width != null && cells.Length != Width)
                 {
                     throw new Exception($"Invalid csv line length: row {offset + data.Count}");
                 }
 
-                width = cells.Length;
+                Width = cells.Length;
                 
                 for (var col = 0; col < cells.Length; col++)
                 {
@@ -64,7 +64,7 @@ namespace SevenSnakesSearch
                 return true;
             }
 
-            height = offset + data.Count;
+            Height = offset + data.Count;
             return false;
         }
 
@@ -76,7 +76,7 @@ namespace SevenSnakesSearch
         /// <returns>true if x and y are within the limits of the grid, false otherwise</returns>
         public bool isValidCellPosition(int col, int row)
         {
-            if (col < 0 || row < 0 || col >= width)
+            if (col < 0 || row < 0 || col >= Width)
                 return false;
             while (row - offset >=  data.Count && ReadNextLine())
             {
@@ -104,59 +104,6 @@ namespace SevenSnakesSearch
         public int GetCell(int col, int row)
         {
             return data[row - offset][col];
-        }
-
-        /// <summary>
-        /// Search for the first pair of similar (same weight) snakes 
-        /// </summary>
-        /// <returns>Tuple containing two similar snakes if found</returns>
-        public Tuple<Snake, Snake> SearchSimilarPair()
-        {
-            var sums = new List<Snake>[MAX_CELL_VALUE * Snake.MAX_LENGTH + 1];
-
-            var row = 0;
-            while (height == null || row < height)
-            {
-                for (var col = 0; col < width; col++)
-                {
-                    // Find new snakes starting at current cell (col, row)
-                    var snakes = new Snake(new Tuple<int, int>(col, row),
-                                           new HashSet<Tuple<int, int>>(),
-                                           GetCell(col, row))
-                                 .GrownList(this);
-              
-                    foreach (var snake in snakes)
-                    {
-                        if (sums[snake.Weight] == null)
-                        {
-                            sums[snake.Weight] = new List<Snake>();
-                        }
-
-                        var maxOverlappedSize = 0;
-                        foreach (var oldSnake in sums[snake.Weight])
-                        {
-                            var overlapped = oldSnake.OverlappedSize(snake);
-                            if (overlapped == 0)
-                            {
-                                return new Tuple<Snake, Snake>(oldSnake, snake);
-                            } 
-                            if(overlapped > maxOverlappedSize)
-                            {
-                                maxOverlappedSize = overlapped;
-                            }
-                                
-                        }
-
-                        if (maxOverlappedSize < Snake.MAX_LENGTH)
-                        {
-                            sums[snake.Weight].Add(snake);
-                        }
-                    }
-                }
-                row++;
-            }
-
-            return null;
         }
         
     }

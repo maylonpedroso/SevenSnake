@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 
 namespace SevenSnakesSearch
 {
@@ -25,7 +26,9 @@ namespace SevenSnakesSearch
             Tuple<Snake, Snake> result;
             try
             {
-                result = new Grid(new StreamReader(filePath)).SearchSimilarPair();
+                var reader = new StreamReader(filePath);
+                result = new Search().findSimilarPair(new Grid(reader));
+                reader.Close();
             }
             catch (FormatException e)
             {
@@ -45,8 +48,8 @@ namespace SevenSnakesSearch
             }
             else
             {
-                Console.WriteLine($"Snake 1: {result.Item1}");
-                Console.WriteLine($"Snake 2: {result.Item2}");
+                Console.WriteLine(result.Item1);
+                Console.WriteLine(result.Item2);
             }
         }
     }
