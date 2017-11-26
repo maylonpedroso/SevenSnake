@@ -1,19 +1,18 @@
 ﻿using System;
 using System.IO;
-using System.Threading;
 
 namespace SevenSnakesSearch
 {
     internal class Program
     {
-        private const string USAGE = "Usage: SevenSnakesSearch.exe csv_path";
+        private const string Usage = "Usage: SevenSnakesSearch.exe csv_path";
         
         public static void Main(string[] args)
         {
 
             if (args.Length != 1)
             {
-                Console.Error.WriteLine(USAGE);
+                Console.Error.WriteLine(Usage);
                 return;
             }
             

@@ -11,7 +11,7 @@ namespace SevenSnakesSearch
         /// <returns>Tuple containing two similar snakes if found</returns>
         public static Tuple<Snake, Snake> FindSimilarPair(Grid grid)
         {
-            var sums = new List<Snake>[Grid.MAX_CELL_VALUE * Snake.MAX_LENGTH + 1];
+            var sums = new List<Snake>[Grid.MaxCellValue * Snake.MaxLength + 1];
 
             var row = 0;
             while (grid.Height == null || row < grid.Height)
@@ -46,7 +46,7 @@ namespace SevenSnakesSearch
                                 
                         }
 
-                        if (maxOverlappedSize < Snake.MAX_LENGTH)
+                        if (maxOverlappedSize < Snake.MaxLength)
                         {
                             sums[snake.Weight].Add(snake);
                         }

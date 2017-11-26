@@ -6,7 +6,7 @@ namespace SevenSnakesSearch
 {
     public class Snake
     {
-        public const int MAX_LENGTH = 7;
+        public const int MaxLength = 7;
         private readonly int[] MX = {0, 1, 0, -1};
         private readonly int[] MY = {1, 0, -1, 0};
         
@@ -55,7 +55,7 @@ namespace SevenSnakesSearch
         {
             var snakes = new List<Snake> { this };
             
-            for (var l = Body.Count; l < MAX_LENGTH; l++)
+            for (var l = Body.Count; l < MaxLength; l++)
             {
                 var next = new List<Snake>();
                 foreach (var snake in snakes)
@@ -95,7 +95,7 @@ namespace SevenSnakesSearch
         /// <returns></returns>
         private bool CanEndInInitialRow(Tuple<int, int> head)
         {
-            return MAX_LENGTH - Body.Count - 1 - (head.Item1 > Body.First().Item1 ? 0 : 1) >=
+            return MaxLength - Body.Count - 1 - (head.Item1 > Body.First().Item1 ? 0 : 1) >=
                    Body.First().Item2 - head.Item2;
         }
 

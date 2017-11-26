@@ -7,7 +7,7 @@ namespace SevenSnakesSearch
 {
     public class Grid
     {
-        public const int MAX_CELL_VALUE = 255;
+        public const int MaxCellValue = 255;
         
         private List<int[]> data;
         
@@ -50,13 +50,13 @@ namespace SevenSnakesSearch
                 
                 for (var col = 0; col < cells.Length; col++)
                 {
-                    if (cells[col] > MAX_CELL_VALUE || cells[col] < 0)
+                    if (cells[col] > MaxCellValue || cells[col] < 0)
                     {
                         throw new Exception($"Invalid cell value in row {offset + data.Count + 1} column {col + 1}");
                     }
                 }
                 data.Add(cells);
-                if (data.Count > 3 * Snake.MAX_LENGTH / 2 - 1)
+                if (data.Count > 3 * Snake.MaxLength / 2 - 1)
                 {
                     data.RemoveAt(0);
                     offset++;
