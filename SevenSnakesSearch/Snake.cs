@@ -6,7 +6,7 @@ namespace SevenSnakesSearch
 {
     public class Snake
     {
-        public const int MAX_LENGTH = 7; 
+        public const int MAX_LENGTH = 7;
         private readonly int[] MX = {0, 1, 0, -1};
         private readonly int[] MY = {1, 0, -1, 0};
         
@@ -88,6 +88,11 @@ namespace SevenSnakesSearch
             return true;
         }
 
+        /// <summary>
+        /// Validate if 
+        /// </summary>
+        /// <param name="head"></param>
+        /// <returns></returns>
         private bool CanEndInInitialRow(Tuple<int, int> head)
         {
             return MAX_LENGTH - Body.Count - 1 - (head.Item1 > Body.First().Item1 ? 0 : 1) >=
@@ -110,7 +115,7 @@ namespace SevenSnakesSearch
         /// <returns>Formatted snaked cells</returns>
         public override string ToString()
         {
-            return string.Join(" ", from cell in Body select $"({cell.Item1 + 1},{cell.Item2 + 1})");
+            return $"[{string.Join(",", from cell in Body select $"({cell.Item2 + 1},{cell.Item1 + 1})")}]";
         }
     }
 }
