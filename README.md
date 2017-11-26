@@ -1,4 +1,4 @@
-# SevenSnake v0.3.2
+# SevenSnake v1.0
 
 Problem solution:
 
