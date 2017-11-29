@@ -92,7 +92,7 @@ namespace SevenSnakesSearch
         /// <returns></returns>
         private static int[] ParseLine(string line)
         {
-            return (from number in line.Split(',') select int.Parse(number) - 1).ToArray();
+            return (from number in line.Split(',',';') select int.Parse(number) - 1).ToArray();
         }
 
         /// <summary>
