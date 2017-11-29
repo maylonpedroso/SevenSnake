@@ -8,8 +8,8 @@ namespace SevenSnakesSearch
     public class Grid
     {
         public const int MaxCellValue = 255;
-        
-        private List<int[]> data;
+
+        private readonly List<int[]> data;
         
         private int offset;
 
@@ -35,7 +35,7 @@ namespace SevenSnakesSearch
         /// </summary>
         /// <returns></returns>
         /// <exception cref="Exception"></exception>
-        private bool ReadNextLine()
+        private void ReadNextLine()
         {
             string line;
             if ((line = reader.ReadLine()) != null)
@@ -47,7 +47,7 @@ namespace SevenSnakesSearch
                 }
 
                 Width = cells.Length;
-                
+
                 for (var col = 0; col < cells.Length; col++)
                 {
                     if (cells[col] > MaxCellValue || cells[col] < 0)
@@ -61,11 +61,11 @@ namespace SevenSnakesSearch
                     data.RemoveAt(0);
                     offset++;
                 }
-                return true;
             }
-
-            Height = offset + data.Count;
-            return false;
+            else
+            {
+                Height = offset + data.Count;
+            }
         }
 
         /// <summary>
@@ -77,9 +77,13 @@ namespace SevenSnakesSearch
         public bool isValidCellPosition(int col, int row)
         {
             if (col < 0 || row < 0 || col >= Width)
-                return false;
-            while (row - offset >=  data.Count && ReadNextLine())
             {
+                return false;
+            }
+
+            while (row - offset >= data.Count && Height == null)
+            {
+                ReadNextLine();
             }
 
             return row - offset < data.Count;
@@ -92,7 +96,7 @@ namespace SevenSnakesSearch
         /// <returns></returns>
         private static int[] ParseLine(string line)
         {
-            return (from number in line.Split(',') select int.Parse(number) - 1).ToArray();
+            return (from number in line.Split(',',';') select int.Parse(number) - 1).ToArray();
         }
 
         /// <summary>

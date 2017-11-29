@@ -3,7 +3,7 @@ using System.IO;
 
 namespace SevenSnakesSearch
 {
-    internal class Program
+    internal static class Program
     {
         private const string Usage = "Usage: SevenSnakesSearch.exe csv_path";
         
